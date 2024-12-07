@@ -1,0 +1,28 @@
+<!-- main/templates/main/upload.html -->
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Upload</title>
+    <link rel="stylesheet" href="{% static 'main/styles.css' %}">
+</head>
+<body>
+    <h1>Upload a File</h1>
+    <div class="container">
+        <div id="preview"></div>
+        <div id="drop-area">
+            <p>Drag and drop a file here or click the button below to select one.</p>
+            <input type="file" id="fileElem" accept="image/*" multiple>
+            <label for="fileElem">Select File</label> <!-- This label acts as the button -->
+        </div>
+    </div>
+    <div id="file-info"></div>
+    <div id="message"></div>
+    <button id="uploadBtn" disabled>Upload</button>
+    <button id="scanBtn">Scan</button>
+
+    <script src="{% static 'main/script.js' %}"></script>
+</body>
+</html>

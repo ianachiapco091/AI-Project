@@ -1,0 +1,25 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recent Upload</title>
+    <link rel="stylesheet" href="{% static 'main/styles.css' %}">
+</head>
+<body>
+    <h1>Recently Uploaded File</h1>
+    <a href="{% url 'upload_file' %}">Upload a File</a>
+    {% if recent_file %}
+        <p>File Name: {{ recent_file.file.name }}</p>
+        <p>Uploaded At: {{ recent_file.uploaded_at }}</p>
+        {% if is_image %}
+            <img src="{{ recent_file.file.url }}" alt="Uploaded Image" style="max-width: 100%; height: auto;">
+        {% else %}
+            <p>This is not an image file.</p>
+        {% endif %}
+    {% else %}
+        <p>No files have been uploaded yet.</p>
+    {% endif %}
+</body>
+</html>
