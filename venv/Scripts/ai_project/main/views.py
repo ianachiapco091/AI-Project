@@ -4,7 +4,10 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from django.conf import settings
 from .forms import UploadFileForm
+from rest_framework.decorators import api_view;
+from rest_framework.response import Response;
 from .models import UploadedFile
+
 def home(request):
     return render(request, 'main/home.html')
 def upload_view(request):
@@ -30,3 +33,14 @@ def upload_file(request):
     else:
         form = UploadFileForm()
     return render(request, 'main/upload.html', {'form': form})
+
+@api_view(['POST'])
+def update_recent_file(request):
+    file_name = request.data.get('file_name')
+    is_image = request.data.get('is_image', False)
+
+    if file_name:
+        UploadedFile.objects.create(file=file_name)
+        return Response({'status' : 'success', 'message': 'Recent file data updated successfully!'})
+    
+    return Response({'status' : 'error', 'message' : 'Invalid data.'})
